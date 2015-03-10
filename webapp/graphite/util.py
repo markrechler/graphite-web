@@ -52,6 +52,8 @@ def epoch(dt):
     """
     Returns the epoch timestamp of a timezone-aware datetime object.
     """
+    if dt.tzinfo is None:
+        dt = dt.replace(tzinfo=pytz.utc)
     return calendar.timegm(dt.astimezone(pytz.utc).timetuple())
 
 def getProfile(request,allowDefault=True):
